@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link href="bootstrap.css" rel="stylesheet">
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="container" ng-controller="appController">
+    <div class="row">
+        <h3>Users:</h3>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>id</th>
+                <th>name</th>
+                <th>surname</th>
+                <th>date of birth</th>
+                <th>mobile number</th>
+                <th>address(city+street+house number)</th>
+                <th>
+                    <button class="btn btn-primary" ng-click="clickOpen(data)" ng-disable="">Edit selected</button>
+                </th>
+
+            </tr>
+            </thead>
+            <tbody ng-form="adminForm">
+            <tr ng-repeat="dataset in data">
+                <td><input type="checkbox" ng-model="dataset.checkFlag"></td>
+                <td><input type="text" size="10" ng-model="dataset.id" ng-show="dataset.setFlag">
+
+                    <p ng-show="!dataset.setFlag">{{dataset.id}}</p></td>
+                <td><input type="text" size="10" name="userName" ng-model="dataset.name"
+                           ng-show="dataset.setFlag">
+
+                    <p ng-show="!dataset.name" style="color: red">* Name mandatory to Save *</p>
+
+
+                    <p ng-show="!dataset.setFlag">{{dataset.name}}</p></td>
+                <td><input type="text" size="10" ng-model="dataset.surname" ng-show="dataset.setFlag">
+
+                    <p ng-show="!dataset.setFlag">{{dataset.surname}}</p></td>
+                <td><input type="text" size="10" ng-model="dataset.dob" ng-show="dataset.setFlag">
+
+                    <p ng-show="!dataset.setFlag">{{dataset.dob}}</p></td>
+                <td><input type="text" size="10" ng-model="dataset.mobile" ng-show="dataset.setFlag">
+
+                    <p ng-show="!dataset.setFlag">{{dataset.mobile}}</p></td>
+                <td><input type="text" size="4" ng-model="dataset.address.city" ng-show="dataset.setFlag">
+                    <input type="text" size="4" ng-model="dataset.address.street" ng-show="dataset.setFlag">
+                    <input type="text" size="4" ng-model="dataset.address.number" ng-show="dataset.setFlag">
+
+                    <p ng-show="!dataset.setFlag">{{dataset.address.city}}, {{dataset.address.street}}
+                        {{dataset.address.number}}</p></td>
+                <td>
+                    <button class="btn-sm btn-primary" ng-click="dataset.setFlag = true" ng-show="!dataset.setFlag">
+                        Edit
+                    </button>
+                    <button class="btn-sm btn-primary" ng-click="dataset.setFlag = false" ng-show="dataset.setFlag"
+                            ng-disabled="!dataset.name">
+                        Save
+                    </button>
+                    <button class="btn-sm btn-danger" ng-click="delete(dataset)">Delete</button>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+<script src="jquery.js"></script>
+<script src="bootstrap.js"></script>
+<script src="angular.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
